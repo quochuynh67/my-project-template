@@ -2,10 +2,14 @@
 
 echo "Welcome!!!!"
 
-echo "Enter project name: "
-read project_name
-echo "Your project name: $project_name"
 
+### get project name from pubspec.yaml
+cd ../..
+read -r line < pubspec.yaml
+IFS=' ' #setting comma as delimiter
+read -a strarr <<<"$line" #reading str as an array as tokens separated by IFS
+project_name = strarr[1]
+cd lib/ui/
 
 echo "Enter file prefix: "
 read prefix
@@ -23,15 +27,16 @@ touch `pwd`/$prefix'_view.dart'
 echo "
 import 'package:flutter/material.dart';
 import 'package:${project_name}/base/base_state_bloc.dart';
+import './${prefix}_bloc.dart';
 
-class ${class_name} extends StatefulWidget {
-  const ${class_name}({Key? key}) : super(key: key);
+class ${class_name}View extends StatefulWidget {
+  const ${class_name}View({Key? key}) : super(key: key);
 
   @override
   _${class_name}State createState() => _${class_name}State();
 }
 
-class _${class_name}State extends BaseStateBloc<${class_name},${class_name}Bloc> {
+class _${class_name}State extends BaseStateBloc<${class_name}View,${class_name}Bloc> {
   @override
   Widget build(BuildContext context) {
     return Container();
@@ -67,11 +72,13 @@ touch `pwd`/$prefix'_route.dart'
 echo "
 import 'package:${project_name}/repo/user_repo.dart';
 import 'package:provider/provider.dart';
+import './${prefix}_bloc.dart';
+import './${prefix}_view.dart';
 
 var ${class_name}Route = ProxyProvider<UserRepo, ${class_name}Bloc>(
   create: (context) {
       ${class_name}Bloc bloc =
-        $NAME$Bloc(userRepo: Provider.of<UserRepo>(context, listen: false));
+              ${class_name}Bloc(userRepo: Provider.of<UserRepo>(context, listen: false));
     return bloc;
   },
   update: (context, userRepo, bloc) {
@@ -81,7 +88,7 @@ var ${class_name}Route = ProxyProvider<UserRepo, ${class_name}Bloc>(
     );
   },
   dispose: (context, bloc) => bloc.dispose(),
-  child: ${class_name}(),
+  child: ${class_name}View(),
 );
 
 " >>  `pwd`/$prefix'_route.dart'

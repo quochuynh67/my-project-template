@@ -2,7 +2,7 @@
 export LC_CTYPE=C
 export LANG=C
 
-echo "Welcome!!!!"
+echo "Welcome !!!!"
 
 echo "Enter project name: "
 read project_name
@@ -26,18 +26,14 @@ do
 
 done
 
-
 ### replace the flutterbaseproject to project_name (anywhere)
 cd $project_name
 pwd
 
 # place all folder for first round
-
-echo "Start change folder"
 find . -exec rename  -s 'flutterbaseproject' $project_name {} +
 
-
-echo "Start change file content"
-## place all text inside the file for second round
+# place all text inside the file for second round
 grep -ilr 'flutterbaseproject' * | xargs -I@ sed -i '' "s/flutterbaseproject/${project_name}/g" @
 
+echo "Creation successfully !!!!"
