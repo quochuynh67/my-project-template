@@ -1,5 +1,0 @@
-
-
-class ApiService {
-/// use http
-}
