@@ -17,5 +17,7 @@ echo "=========> [$template_path]"
 
 ### copy all subfolder of template to new project folder
 for f in $(ls $template_path);
-do cp -R ${template_path}/$f ./${project_name};
+do
+  cp -R ${template_path}/$f ./${project_name};
+  sed -i '' "s/flutterbaseproject/${project_name}/g" ./${project_name}/$f
 done
