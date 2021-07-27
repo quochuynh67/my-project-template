@@ -32,15 +32,37 @@ Clone the git sample.
 git clone https://github.com/quochuynh67/my-project-template
 ```
 
+## Usage
 To create new project, by running:
 ```sh
 ../my-project-template/flutter_project_creation.sh
 ```
 
-And then, Input your project name. For example: **test_new_project**
+:arrow_right_hook: And then, Input your project name. For example: **test_new_project**
 
-And then, Input the path to the template you want to use with new project. For example: **../my-project-template/flutter-base-project-structure-1**
+:arrow_right_hook: And then, Input the path to the template you want to use with new project. For example: **../my-project-template/flutter-base-project-structure-1**
 
-After that, It will be created like the image below
+:arrow_right_hook: After that, It will be created like the image below
 ![image info](./pictures/create_project.png)
 
+
+:information_source: Note
+ ``` 
+Don't worry about `already exist MainActivity.kt` file, because Android studio was created one time.
+And then bashscript change it's parent folder.
+```
+
+To create feature, by running:
+
+:warning: make sure you went to **lib/ui** where contains your feature folder
+```sh
+../my-project-template/flutter_feature_creation.sh
+```
+:arrow_right_hook: And then, input the prefix file you want. For example **setting**:
+This step will create 3 file: **setting_bloc.dart**, **setting_route.dart**, **setting_view.dart**
+
+:arrow_right_hook: And then, input the name for class you want. For example: **Setting**:
+This step will generate the content into the file such as: **SettingView**, **SettingBloc**.
+
+![image info](./pictures/create_feature.png)
+![image info](./pictures/code.png)
