@@ -8,8 +8,9 @@ cd ../..
 read -r line < pubspec.yaml
 IFS=' ' #setting comma as delimiter
 read -a strarr <<<"$line" #reading str as an array as tokens separated by IFS
-set project_name = strarr[1]
+project_name=${strarr[1]}
 cd lib/ui/
+
 
 echo "Enter file prefix: "
 read prefix
