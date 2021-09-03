@@ -59,9 +59,11 @@ To create feature, by running:
 ../my-project-template/flutter_feature_creation.sh
 ```
 :arrow_right_hook: And then, input the prefix file you want. For example **setting**:
+
 This step will create 3 file: **setting_bloc.dart**, **setting_route.dart**, **setting_view.dart**
 
 :arrow_right_hook: And then, input the name for class you want. For example: **Setting**:
+
 This step will generate the content into the file such as: **SettingView**, **SettingBloc**.
 
 ![image info](./pictures/create_feature.png)
