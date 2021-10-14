@@ -13,7 +13,7 @@ mkdir $project_name
 
 ### Input template path
 
-echo "Enter template path. Make sure it was cloned"
+echo "Enter template path. Make sure it was cloned": 
 read template_path
 echo "=========> [$template_path]"
 
