@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutterbaseproject/base/base_bloc.dart';
+import 'package:flutterbaseproject/core/base/base_bloc.dart';
 import 'package:flutterbaseproject/repo/user_repo.dart';
 
 class HomeBloc extends BaseBloc {

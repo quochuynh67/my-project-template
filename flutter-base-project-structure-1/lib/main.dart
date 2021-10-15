@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutterbaseproject/repo/user_repo.dart';
 import 'package:flutterbaseproject/service/api/api_service.dart';
@@ -8,6 +9,7 @@ import 'package:flutterbaseproject/ui/splash/splash_route.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/theme/theme_notifier.dart';
 import 'generated/l10n.dart';
 
 Future<void> main() async {
@@ -24,11 +26,29 @@ Future<void> main() async {
       await SharedPreferences.getInstance();
   final SharedPreferenceService sharedPreferenceServices =
       SharedPreferenceService(sharedPreferences);
-  return runApp(MyApp(
-    databaseService: databaseService,
-    apiService: apiService,
-    sharedPreferenceServices: sharedPreferenceServices,
-  ));
+
+  SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values).then((_) {
+    SharedPreferences.getInstance().then((prefs) {
+      final darkModeOn =
+          prefs.getBool('isDarkTheme') ?? ThemeNotifier.getSystemTheme();
+      runApp(
+        ChangeNotifierProvider<ThemeNotifier>(
+          create: (_) =>
+              ThemeNotifier(darkModeOn ? ThemeData.dark() : ThemeData.light()),
+          child: MyApp(
+            databaseService: databaseService,
+            apiService: apiService,
+            sharedPreferenceServices: sharedPreferenceServices,
+          ),
+        ),
+      );
+    });
+  });
+  // return runApp(MyApp(
+  //   databaseService: databaseService,
+  //   apiService: apiService,
+  //   sharedPreferenceServices: sharedPreferenceServices,
+  // ));
 }
 
 class MyApp extends StatelessWidget {
@@ -84,16 +104,22 @@ class MyApp extends StatelessWidget {
           },
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: splashRoute,
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
+      child: Consumer<ThemeNotifier>(
+        builder: (context, appState, child) {
+          final themeNotifier = Provider.of<ThemeNotifier>(context);
+          return MaterialApp(
+            theme: themeNotifier.getTheme(),
+            debugShowCheckedModeBanner: false,
+            home: splashRoute,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+          );
+        },
       ),
     );
   }
