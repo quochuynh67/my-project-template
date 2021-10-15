@@ -25,6 +25,10 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 ```
 
+## Multiple-Language
+Install `flutter intl` plugin from marketplace
+
+And follow this guide to add the language.
 
 Clone the git sample.
 
