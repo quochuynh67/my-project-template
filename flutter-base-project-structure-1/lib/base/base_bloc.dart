@@ -4,13 +4,13 @@ import 'package:rxdart/rxdart.dart';
 enum ScreenState { NORMAL, LOADING, WHITE_LOADING }
 
 abstract class BaseBloc {
-  BehaviorSubject<ScreenState> _bsScreenState = BehaviorSubject();
+  final BehaviorSubject<ScreenState> _bsScreenState = BehaviorSubject();
 
   // use to show error message dialog
-  PublishSubject<String> _psErrorMessage = PublishSubject();
+  final PublishSubject<String> _psErrorMessage = PublishSubject();
 
   // use to show success message dialog
-  PublishSubject<String> _psSuccessMessage = PublishSubject();
+  final PublishSubject<String> _psSuccessMessage = PublishSubject();
 
   void closeScreenState() => _bsScreenState.close();
 

@@ -7,8 +7,12 @@ import 'package:flutterbaseproject/ui/home/home_route.dart';
 import 'package:flutterbaseproject/ui/splash/splash_bloc.dart';
 
 class SplashView extends StatefulWidget {
+  const SplashView({
+    Key? key,
+  }) : super(key: key);
+
   @override
-  _SplashViewState createState() => _SplashViewState();
+  State createState() => _SplashViewState();
 }
 
 class _SplashViewState extends BaseStateBloc<SplashView, SplashBloc> {
@@ -26,19 +30,17 @@ class _SplashViewState extends BaseStateBloc<SplashView, SplashBloc> {
     subUserLoginState = getBloc(listen: false).psUserLoginState.listen((state) {
       switch (state) {
         case UserLoginState.LOGGED_IN:
-          Navigator.of(context).pushReplacement(
-            PageRouteBuilder(
-              transitionDuration: Duration(
-                seconds: 2,
-              ),
-              pageBuilder: (_, __, ___) => homeRoute,
+          Navigator.of(context).pushReplacement(PageRouteBuilder<void>(
+            transitionDuration: const Duration(
+              seconds: 2,
             ),
-          );
+            pageBuilder: (_, __, ___) => homeRoute,
+          ));
           break;
         case UserLoginState.NOT_LOGIN:
           Navigator.of(context).pushReplacement(
-            PageRouteBuilder(
-              transitionDuration: Duration(
+            PageRouteBuilder<void>(
+              transitionDuration: const Duration(
                 seconds: 2,
               ),
               pageBuilder: (_, __, ___) => homeRoute,
@@ -51,11 +53,9 @@ class _SplashViewState extends BaseStateBloc<SplashView, SplashBloc> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text("Splash Screen"),
-        ),
+    return const Scaffold(
+      body: Center(
+        child: Text('Splash Screen'),
       ),
     );
   }

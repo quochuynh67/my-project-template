@@ -6,7 +6,7 @@ import 'splash_view.dart';
 
 var splashRoute = ProxyProvider<UserRepo, SplashBloc>(
   create: (context) {
-    SplashBloc splashBloc =
+    final SplashBloc splashBloc =
         SplashBloc(userRepo: Provider.of<UserRepo>(context, listen: false));
 
     splashBloc.checkLogin();
@@ -14,11 +14,13 @@ var splashRoute = ProxyProvider<UserRepo, SplashBloc>(
     return splashBloc;
   },
   update: (context, userRepo, splashBloc) {
-    if (splashBloc != null) return splashBloc;
+    if (splashBloc != null) {
+      return splashBloc;
+    }
     return SplashBloc(
       userRepo: userRepo,
     );
   },
   dispose: (context, splashBloc) => splashBloc.dispose(),
-  child: SplashView(),
+  child: const SplashView(),
 );

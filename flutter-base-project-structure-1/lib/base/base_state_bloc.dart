@@ -17,7 +17,7 @@ abstract class BaseStateBloc<T extends StatefulWidget, B extends BaseBloc>
 
   @override
   void initState() {
-    getBloc(listen: false)
+    getBloc()
         .getErrorMessage()
         .distinct((errorPrev, errorNext) => errorPrev == errorNext)
         .listen((e) {});
@@ -31,7 +31,7 @@ abstract class BaseStateBloc<T extends StatefulWidget, B extends BaseBloc>
         buildContent(),
         StreamBuilder<ScreenState>(
           initialData: ScreenState.NORMAL,
-          stream: getBloc(listen: false).getScreenState(),
+          stream: getBloc().getScreenState(),
           builder: (context, snapshot) {
             switch (snapshot.data) {
               case ScreenState.NORMAL:

@@ -1,5 +1,5 @@
 class EndPoint {
-  static const ROOT_URL = "";
+  static const ROOT_URL = '';
 
   /// GET
 

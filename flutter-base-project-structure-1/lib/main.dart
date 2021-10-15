@@ -12,14 +12,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// api init
-  ApiService apiService = ApiService();
+  final ApiService apiService = ApiService();
 
   /// database init
-  DbService databaseService = DbService();
+  final DbService databaseService = DbService();
 
   /// shared preferences init
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  SharedPreferenceService sharedPreferenceServices =
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  final SharedPreferenceService sharedPreferenceServices =
       SharedPreferenceService(sharedPreferences);
   return runApp(MyApp(
     databaseService: databaseService,
@@ -29,15 +30,21 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final DbService databaseService;
-  final ApiService apiService;
-  final SharedPreferenceService sharedPreferenceServices;
-
-  MyApp({
+  const MyApp({
+    Key? key,
     required this.sharedPreferenceServices,
     required this.apiService,
     required this.databaseService,
-  });
+  }) : super(key: key);
+
+  /// Database
+  final DbService databaseService;
+
+  /// API service
+  final ApiService apiService;
+
+  /// Cache service using Share Preferences
+  final SharedPreferenceService sharedPreferenceServices;
 
   @override
   Widget build(BuildContext context) {
@@ -53,19 +60,21 @@ class MyApp extends StatelessWidget {
           value: sharedPreferenceServices,
         ),
 
-       /// multiple language
-       ProxyProvider<SharedPreferenceService, LanguageService>(
-         update: (context, sharedPreferenceService, languageService) =>
-             LanguageService(sharedPreferenceService),
-         dispose: (context, languageService) => languageService.dispose(),
-       ),
+        /// multiple language
+        // ProxyProvider<SharedPreferenceService, LanguageService>(
+        //   update: (context, sharedPreferenceService, languageService) =>
+        //       LanguageService(sharedPreferenceService),
+        //   dispose: (context, languageService) => languageService.dispose(),
+        // ),
 
         /// userRepo
         ProxyProvider3<DbService, ApiService, SharedPreferenceService,
             UserRepo>(
           update: (context, databaseService, apiService,
               sharedPreferenceService, userRepo) {
-            if (userRepo != null) return userRepo;
+            if (userRepo != null) {
+              return userRepo;
+            }
             return UserRepo(
                 databaseService: databaseService,
                 apiService: apiService,
