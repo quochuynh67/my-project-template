@@ -6,7 +6,7 @@
 // import 'language_resource/en.dart';
 // import 'language_resource/ko.dart';
 // import 'language_resource/vi.dart';
-
+@Deprecated('Use Flutter Intl to handle multiple language instead this way')
 class LanguageService {
   // LanguageService(this._prefService) {
   //   currentLang = _prefService.getCurrentLanguage() ?? CountryCode.EN;
