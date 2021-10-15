@@ -3,13 +3,17 @@ These template help in fast project creation. This repo will include multiple te
 
 ## Features
 
+#### flutter-base-project-structure-1
 - Create simple flutter project using rxdart, sqflite, provider
 - Saparate project folder: view - bussiness logic - service
 - Create feature file very fast: create 3 files (view, logic, route)
+#### flutter-base-project-structure-2
+- cleaner base
 
 ## Next release
 - Add more app structure such as scope_model, flutter_bloc, redux, mobx...
 - Update bashscript to use easily, switch another structure
+- Use Navigator 2.0
 
 ## Dependencies
 
