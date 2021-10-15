@@ -28,7 +28,11 @@ environment:
 ## Multiple-Language
 Install `flutter intl` plugin from marketplace
 
-And follow this guide to add the language.
+And follow [this guide](https://plugins.jetbrains.com/plugin/13666-flutter-intl) to add the language.
+
+
+
+## Usage
 
 Clone the git sample.
 
