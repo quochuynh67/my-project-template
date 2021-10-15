@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutterbaseproject/base/base_state_bloc.dart';
 import 'package:flutterbaseproject/constant/app_state.dart';
+import 'package:flutterbaseproject/generated/l10n.dart';
 import 'package:flutterbaseproject/ui/home/home_route.dart';
 import 'package:flutterbaseproject/ui/splash/splash_bloc.dart';
 
@@ -53,9 +54,9 @@ class _SplashViewState extends BaseStateBloc<SplashView, SplashBloc> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('Splash Screen'),
+        child: Text(S.of(context).splash_title),
       ),
     );
   }

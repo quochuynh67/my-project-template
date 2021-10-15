@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbaseproject/base/base_state_bloc.dart';
+import 'package:flutterbaseproject/generated/l10n.dart';
 
 import 'home_bloc.dart';
 
@@ -11,11 +12,25 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends BaseStateBloc<HomeView, HomeBloc> {
+  bool _isEnglish = true;
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _isEnglish = !_isEnglish;
+            if (_isEnglish) {
+              S.delegate.load(const Locale('en', 'EN'));
+            } else {
+              S.delegate.load(const Locale('vi', 'VI'));
+            }
+          });
+        },
+      ),
       body: Center(
-        child: Text('Home Screen'),
+        child: Text(S.current.home_title),
       ),
     );
   }
