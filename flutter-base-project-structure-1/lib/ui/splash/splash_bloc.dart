@@ -7,13 +7,11 @@ import 'package:rxdart/rxdart.dart';
 class SplashBloc extends BaseBloc {
   SplashBloc({
     required this.userRepo,
-  }) {
-    psUserLoginState = BehaviorSubject();
-  }
+  });
 
   final UserRepo userRepo;
 
-  late BehaviorSubject<UserLoginState> psUserLoginState;
+  final BehaviorSubject<UserLoginState> psUserLoginState = BehaviorSubject();
 
   void checkLogin() {
     Future<void>.delayed(const Duration(seconds: 2)).then((_) {
