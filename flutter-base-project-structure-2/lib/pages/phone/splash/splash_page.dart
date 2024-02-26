@@ -23,7 +23,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashBloc> {
   @override
   void initData() {
     super.initData();
-    bloc.loadData();
+    // bloc.loadData();
   }
 
   // override this function to get data from previous page
